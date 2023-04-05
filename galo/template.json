@@ -1,0 +1,10 @@
+{
+    "replacements":
+    [
+        {
+            "replacement":"Your-Game-Name",
+            "pattern":"${PROJECT_NAME}",
+            "cmdOption":"-n"
+        }
+    ]
+}
