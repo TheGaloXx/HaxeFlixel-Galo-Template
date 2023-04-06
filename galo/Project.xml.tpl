@@ -22,8 +22,10 @@
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
 	
-	<!--<haxedef name="DISCORD_CLIENT" if="cpp"/>-->
+	<haxedef name="DISCORD_CLIENT" if="cpp"/>	<!-- delete this line to disable the Discord Rich Presence -->
+	<haxedef name="CRASH_HANDLER" if="sys"/>	<!-- delete this line to disable the Crash handler -->
 	<!--<haxedef name="NO_FLXSAVE"/>-->
+
 	<!--<haxedef name="FLX_NO_MOUSE_ADVANCED" />-->
 	<!--<haxedef name="FLX_NO_MOUSE"/>-->
 	<!--<haxedef name="FLX_NO_KEYBOARD"/>-->

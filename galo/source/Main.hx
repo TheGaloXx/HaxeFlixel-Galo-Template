@@ -5,7 +5,7 @@ import openfl.display.Sprite;
 
 using StringTools;
 
-#if sys
+#if (sys && CRASH_HANDLER)
 import haxe.CallStack.StackItem;
 import haxe.CallStack;
 import haxe.io.Path;
@@ -33,13 +33,13 @@ class Main extends Sprite
 		flixel.addons.studio.FlxStudio.create();
 		#end
 
-		#if sys
+		#if (sys && CRASH_HANDLER)
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
-	#if sys
+	#if (sys && CRASH_HANDLER)
 	private function onCrash(e:UncaughtErrorEvent):Void
 	{
 		var errMsg:String = "";
@@ -50,7 +50,7 @@ class Main extends Sprite
 		dateNow = dateNow.replace(" ", "_");
 		dateNow = dateNow.replace(":", "'");
 
-		path = "./crash/" + '${appTitle}_' + dateNow + ".txt";
+		path = "./crash/" + 'crash_' + dateNow + ".txt";
 
 		for (stackItem in callStack)
 		{

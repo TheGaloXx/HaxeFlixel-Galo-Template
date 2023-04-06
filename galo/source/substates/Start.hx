@@ -17,6 +17,8 @@ class Start extends flixel.FlxState
 		Discord.DiscordClient.initialize();
 		#end
 
+		Utils.title(null);
+
         //flixel.system.FlxAssets.FONT_DEFAULT = Paths.font('Storytime.ttf', 'game');
 		FlxG.worldBounds.set(0, 0);
 		FlxG.sound.muted = FlxG.mouse.visible = false;
@@ -54,7 +56,7 @@ class Start extends flixel.FlxState
     private function saveCompiles()
         {
             #if sys
-            var GAME_NAME = "Put here your game's name.";
+            var GAME_NAME = "Put here your game's name."; //Change this to your game's folder name to save the times compiled
 
 			if (GAME_NAME == "Put here your game's name.")
 				return;

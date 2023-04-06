@@ -8,15 +8,13 @@ class Utils
 			 * Function that changes the `Discord Rich Presence`.
 			 * @param   state   The second line in the presence (use it for info).
 			 * @param   details   The first line in the presence (use for current state and details).
-			 * @param   hasStartTimestamp      Time left indicator (ignore).
-			 * @param   endTimestamp     End time indicator (ignore).
              * @param   smallImageKey The small image name.
     **/
 
-	public static function presence(state:String, details:String, ?hasStartTimestamp:Bool, ?endTimestamp:Float, smallImageKey:String, addLittleIcon:Bool = false)
+	public static function presence(state:String, details:String, smallImageKey:String, addLittleIcon:Bool = false)
 	{
         #if DISCORD_CLIENT
-		Discord.DiscordClient.changePresence(state, details, hasStartTimestamp, endTimestamp, smallImageKey, addLittleIcon);
+		Discord.DiscordClient.changePresence(state, details, smallImageKey, addLittleIcon);
         #end
 	}
 
