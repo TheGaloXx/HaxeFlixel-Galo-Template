@@ -22,6 +22,16 @@ class Paths
         return 'assets/$library/sounds/$key.ogg';
     }
 
+    /**
+			 * Function that returns a font path.
+			 * @param   key   The font name (REMEMBER TO ADD THE FONT EXTENSION).
+    **/
+    
+    public static function font(key:String):String
+    {
+        return 'assets/fonts/$key';
+    }
+
     public static function getSparrowAtlas(key:String, ?library:String):String
     {
         return flixel.graphics.frames.FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));
