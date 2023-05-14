@@ -14,7 +14,8 @@
 	<set name="BUILD_DIR" value="export/32bit" if="32bit" />
 
 	<source path="source" />
-	<assets path="assets" />
+	<assets path="assets/shared" rename="assets"/>
+	<assets path="assets/game" embed="true"/>
 
 	<haxedef name="FLX_NO_TOUCH"/>
 	<haxedef name="FLX_NO_GAMEPAD" />
@@ -22,7 +23,7 @@
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
 	
-	<haxedef name="DISCORD_CLIENT" if="cpp"/>	<!-- delete this line to disable the Discord Rich Presence -->
+	<haxedef name="DISCORD_CLIENT" if="sys"/>	<!-- delete this line to disable the Discord Rich Presence -->
 	<haxedef name="CRASH_HANDLER" if="sys"/>	<!-- delete this line to disable the Crash handler -->
 	<!--<haxedef name="NO_FLXSAVE"/>-->
 

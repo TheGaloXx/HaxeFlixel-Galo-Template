@@ -15,6 +15,7 @@ class Start extends flixel.FlxState
 
         #if DISCORD_CLIENT
 		Discord.DiscordClient.initialize();
+		Utils.presence('Playing', 'test');
 		#end
 
 		Utils.title(null);

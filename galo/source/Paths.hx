@@ -29,10 +29,10 @@ class Paths
     
     public static function font(key:String):String
     {
-        return 'assets/fonts/$key';
+        return 'assets/game/fonts/$key';
     }
 
-    public static function getSparrowAtlas(key:String, ?library:String):String
+    public static function getSparrowAtlas(key:String, ?library:String)
     {
         return flixel.graphics.frames.FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));
     }

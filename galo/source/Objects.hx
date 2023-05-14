@@ -61,3 +61,27 @@ class FPSCounter extends openfl.text.TextField
 			textColor = 0xFFFFFFFF;
 	}
 }
+
+class Error extends flixel.text.FlxText
+{
+	override public function new(message:String)
+	{
+		super(0, 100, flixel.FlxG.width, "", 64);
+
+		autoSize = false;
+		setFormat(null, 52, FlxColor.RED, CENTER, OUTLINE, FlxColor.BLACK);
+		text = 'Error\n$message';
+		screenCenter(X);
+		borderSize = 4;
+		active = false;
+
+		FlxTween.tween(this, {alpha: 0, y: 0}, 1, {
+			startDelay: 2,
+			onComplete: function(_)
+			{
+				this.destroy();
+				destroy();
+			}
+		});
+	}
+}

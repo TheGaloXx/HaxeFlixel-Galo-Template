@@ -1,8 +1,5 @@
 package;
 
-import flixel.FlxGame;
-import openfl.display.Sprite;
-
 using StringTools;
 
 #if (sys && CRASH_HANDLER)
@@ -19,14 +16,14 @@ import sys.io.File;
 import sys.io.Process;
 #end
 
-class Main extends Sprite
+class Main extends openfl.display.Sprite
 {
 	public static var appTitle:String = 'Your App Title';
 
 	public function new()
 	{
 		super();
-		addChild(new FlxGame(0, 0, substates.Start));
+		addChild(new flixel.FlxGame(0, 0, substates.Start));
 		addChild(new Objects.FPSCounter());
 
 		#if debug
@@ -35,6 +32,10 @@ class Main extends Sprite
 
 		#if (sys && CRASH_HANDLER)
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+		#end
+
+		#if (hl && !debug)
+		hl.UI.closeConsole();
 		#end
 	}
 
