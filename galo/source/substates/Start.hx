@@ -6,29 +6,37 @@ class Start extends flixel.FlxState
 {
 	override function create()
 	{
-
 		#if debug
 		saveCompiles();
 
-        FlxG.sound.volumeUpKeys = [PLUS, Q];
+		#if (!FLX_NO_SOUND_TRAY && !FLX_NO_SOUND_SYSTEM)
+		FlxG.sound.volumeUpKeys = [PLUS, Q];
+		#end
 		#end
 
-        #if DISCORD_CLIENT
+		#if DISCORD_CLIENT
 		Discord.DiscordClient.initialize();
-		Utils.presence('Playing', 'test');
+		Utils.presence('Playing', 'test', 'x');
 		#end
 
 		Utils.title(null);
 
-        //flixel.system.FlxAssets.FONT_DEFAULT = Paths.font('Storytime.ttf', 'game');
+		// flixel.system.FlxAssets.FONT_DEFAULT = Paths.font('Storytime.ttf', PRELOAD);
 		FlxG.worldBounds.set(0, 0);
-		FlxG.sound.muted = FlxG.mouse.visible = false;
-		flixel.FlxSprite.defaultAntialiasing = FlxG.mouse.useSystemCursor = true;
+		flixel.FlxSprite.defaultAntialiasing = true;
+
+		#if (!FLX_NO_SOUND_TRAY && !FLX_NO_SOUND_SYSTEM)
+		FlxG.sound.muted = false;
 		FlxG.sound.volume = 1;
+		#end
+
+		#if !FLX_NO_MOUSE
+		FlxG.mouse.visible = FlxG.mouse.enabled = FlxG.mouse.useSystemCursor = true;
+		#end
 
 		FlxG.signals.preStateSwitch.add(function()
 		{
-			FlxG.bitmap.dumpCache();
+			// FlxG.bitmap.dumpCache();
 		});
 
 		FlxG.signals.postStateSwitch.add(function()
@@ -38,15 +46,15 @@ class Start extends flixel.FlxState
 
 		lime.app.Application.current.onExit.add(function(exitCode)
 		{
-            #if DISCORD_CLIENT
-            DiscordClient.shutdown();
-            #end
+			#if DISCORD_CLIENT
+			Discord.DiscordClient.shutdown();
+			#end
 
 			#if sys
 			Sys.exit(1);
 			#else
-            openfl.system.System.exit(1);
-            #end
+			openfl.system.System.exit(1);
+			#end
 		});
 
 		FlxG.switchState(new menus.PlayState());
@@ -54,27 +62,49 @@ class Start extends flixel.FlxState
 		super.create();
 	}
 
-    private function saveCompiles()
-        {
-            #if sys
-            var GAME_NAME = "Put here your game's name."; //Change this to your game's folder name to save the times compiled
+	private function saveCompiles():Void
+	{
+		#if sys
+		var compiles:Int = 0;
 
-			if (GAME_NAME == "Put here your game's name.")
-				return;
+		var cwd = haxe.io.Path.normalize(Sys.getCwd());
+		var thePath = StringTools.replace(cwd, 'export/debug/${getTarget()}/bin', '') + 'compiles.galo';
 
-            var thePath = lime.system.System.desktopDirectory + 'Carpetas/Source Code/other/$GAME_NAME/compiles.galo';
-            var compiles:Int = 0;
-    
-            trace('Path exists: ${sys.FileSystem.exists(thePath)}.');
-    
-            if (sys.FileSystem.exists(thePath))
-                compiles = Std.parseInt(sys.io.File.getContent(thePath));
-    
-            trace("TIMES COMPILED: " + compiles);
-    
-            sys.io.File.saveContent(thePath, Std.string(compiles += 1));
-            #end
-    
-            return;
-        }
+		trace('Path exists: ${sys.FileSystem.exists(thePath)}.');
+
+		if (sys.FileSystem.exists(thePath))
+			compiles = Std.parseInt(sys.io.File.getContent(thePath));
+
+		sys.io.File.saveContent(thePath, Std.string(compiles + 1));
+		#else
+		trace('Target is not compatible to save compiles!');
+		#end
+	}
+
+	private function getTarget():String
+	{
+		var target:String = '';
+
+		#if python
+		target = 'python';
+		#elseif java
+		target = 'java';
+		#elseif cs
+		target = 'cs';
+		#elseif cpp
+		target = 'cpp';
+		#elseif php
+		target = 'php';
+		#elseif macro
+		target = 'macro';
+		#elseif lua
+		target = 'lua';
+		#elseif hl
+		target = 'hl';
+		#elseif neko
+		target = 'neko';
+		#end
+
+		return target;
+	}
 }

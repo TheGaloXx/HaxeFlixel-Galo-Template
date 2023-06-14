@@ -664,7 +664,8 @@ class FlxG
 
 	static function initSave()
 	{
-        #if NO_FLXSAVE
+        #if NO_FLXSAVE // I added this as an issue in the Flixel repository: https://github.com/HaxeFlixel/flixel/issues/2838
+		trace('NO INIT SAVE');
         return;
         #end
         

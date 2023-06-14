@@ -2,7 +2,7 @@
     "replacements":
     [
         {
-            "replacement":"Your-Game-Name",
+            "replacement":"YourGame",
             "pattern":"${PROJECT_NAME}",
             "cmdOption":"-n"
         }

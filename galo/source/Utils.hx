@@ -30,7 +30,7 @@ class Utils
 	{
 		var daTitle:String = "";
 		if (!deleteAppTitle)
-			daTitle = Main.appTitle;
+			daTitle = lime.app.Application.current.meta.get('name');
 
 		if (state == null || state == "")
 			lime.app.Application.current.window.title = daTitle;
@@ -76,8 +76,16 @@ class Utils
 		#if !hl //for some reason it doesn't work on HashLink
 		return lime.app.Application.current.window.alert(errorMessage, windowMessage);
 		#else
-		flixel.FlxG.state.add(new Error(errorMessage));
+		flixel.FlxG.state.add(new Objects.Error(errorMessage));
 		#end
+	}
+
+	static public function multHitbox(sprite:flixel.FlxSprite, mult:Float):Void
+	{
+		var width = sprite.width;
+		var height = sprite.height;
+		sprite.setSize(sprite.width * mult, sprite.width * mult);
+		sprite.offset.set(-width / 3, -height / 3);
 	}
 }
 

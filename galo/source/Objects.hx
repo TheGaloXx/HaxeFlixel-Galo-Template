@@ -75,7 +75,7 @@ class Error extends flixel.text.FlxText
 		borderSize = 4;
 		active = false;
 
-		FlxTween.tween(this, {alpha: 0, y: 0}, 1, {
+		flixel.tweens.FlxTween.tween(this, {alpha: 0, y: 0}, 1, {
 			startDelay: 2,
 			onComplete: function(_)
 			{

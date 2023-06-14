@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ```[version] - day-month-year```
 
+## [0.0.4] - 14-6-2023
+
+### Removed
+- Shaders class
+
+### Changed
+- Fixed defines problems in the `project.xml`
+- Fixed and improved Paths and libraries
+- Crash handler is not optional anymore
+- Improved compiles saving system
+
 ## [0.0.3] - 14-5-2023
 
 ### Added

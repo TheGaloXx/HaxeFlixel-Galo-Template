@@ -13,9 +13,12 @@
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
 	<set name="BUILD_DIR" value="export/32bit" if="32bit" />
 
+	<library name="preload" preload="true" />
+	<library name="shared" preload="false" />
+
 	<source path="source" />
-	<assets path="assets/shared" rename="assets"/>
-	<assets path="assets/game" embed="true"/>
+	<assets path="assets/preload" embed="true" library="preload"/>
+	<assets path="assets/shared" rename="assets" library="shared"/>
 
 	<haxedef name="FLX_NO_TOUCH"/>
 	<haxedef name="FLX_NO_GAMEPAD" />
@@ -23,9 +26,9 @@
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
 	
-	<haxedef name="DISCORD_CLIENT" if="sys"/>	<!-- delete this line to disable the Discord Rich Presence -->
-	<haxedef name="CRASH_HANDLER" if="sys"/>	<!-- delete this line to disable the Crash handler -->
-	<!--<haxedef name="NO_FLXSAVE"/>-->
+	<haxedef name="DISCORD_CLIENT" if="windows" unless="hl"/>	<!-- delete this line to disable the Discord Rich Presence -->
+	<define name="FLXSTUDIO" if="debug"/> <!-- delete this line to disable FlxStudio -->
+	<haxedef name="NO_FLXSAVE"/>
 
 	<!--<haxedef name="FLX_NO_MOUSE_ADVANCED" />-->
 	<!--<haxedef name="FLX_NO_MOUSE"/>-->
@@ -34,7 +37,7 @@
 	<!--<haxedef name="FLX_NO_SOUND_SYSTEM" />-->
 
 	<haxelib name="flixel" />
-	<haxelib name="flixel-studio" if="debug"/>
+	<haxelib name="flixel-studio" if="FLXSTUDIO"/>
 	<!--<haxelib name="flixel-addons" />-->
 	<!--<haxelib name="flixel-ui" />-->
 	<haxelib name="discord_rpc" if="DISCORD_CLIENT"/>
